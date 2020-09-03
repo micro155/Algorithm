@@ -12,18 +12,20 @@ int binarySearch(vector<int> arr, int target, int start, int end)
 		return -1;
 
 	int mid = (start + end) / 2;
-
-	if (arr[mid] == target)
+	while (start <= end)
 	{
-		return mid;
-	}
-	else if (arr[mid] < target)
-	{
-		return binarySearch(arr, target, mid + 1, end);
-	}
-	else
-	{
-		return binarySearch(arr, target, start, mid - 1);
+		if (arr[mid] == target)
+		{
+			return mid;
+		}
+		else if (arr[mid] < target)
+		{
+			return binarySearch(arr, target, mid + 1, end);
+		}
+		else
+		{
+			return binarySearch(arr, target, start, mid - 1);
+		}
 	}
 }
 
