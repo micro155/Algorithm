@@ -1,4 +1,3 @@
-#define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <vector>
 
@@ -18,12 +17,12 @@ int binarySearch(vector<int>& arr, int start, int end) {
 
 
 
-int n, m;
+int n;
 vector<int> arr;
 
 int main(void)
 {
-	cin >> n >> m;
+	cin >> n;
 
 	for (int i = 0; i < n; i++)
 	{
