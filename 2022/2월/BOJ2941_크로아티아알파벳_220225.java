@@ -6,46 +6,50 @@ import java.io.InputStreamReader;
 public class BOJ2941_크로아티아알파벳_220225 {
 
     private static String str;
+    private static boolean check[];
+    private static String words[] = {"c=", "c-", "dz=", "d-", "lj", "nj", "s=", "z="};
 
     public static void main(String[] args) throws Exception {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         str = br.readLine();
+        check = new boolean[str.length()];
+        int result = 0;
 
+        for (int i = 0; i < words.length; i++) {
 
-        int len = str.length();
-        int cnt = 0;
+            String temps = str;
 
-        for (int i = 0; i < len; i++) {
-
-            char ch = str.charAt(i);
-
-            if (ch == 'c' && i < len - 1) {
-                if (str.charAt(i + 1) == '=' || str.charAt(i + 1) == '-') {
-                    i++;
-                }
-            } else if (ch == 'd' && i < len - 1) {
-                if (str.charAt(i + 1) == '-') {
-                    i++;
-                } else if (str.charAt(i + 1) == 'z' && i < len - 2) {
-                    if (str.charAt(i + 2) == '=') {
-                        i += 2;
+            int reset_index = 0;
+            while (true) {
+                int start = temps.indexOf(words[i]);
+                int words_length = words[i].length();
+                if (start != -1) {
+                    if (check[reset_index + start] == false) {
+                        for (int j = 0; j < words_length; j++) {
+                            check[reset_index + start++] = true;
+                        }
+                        result++;
+                        temps = temps.substring(start);
+                        reset_index += start;
+                    } else {
+                        reset_index += start + words_length;
+                        temps = temps.substring(start + words_length);
+                        continue;
                     }
-                }
-            } else if ((ch == 'l' || ch == 'n') && i < len - 1) {
-                if (str.charAt(i + 1) == 'j') {
-                    i++;
-                }
-            } else if ((ch == 's' || ch == 'z') && i < len - 1) {
-                if (str.charAt(i + 1) == '=') {
-                    i++;
+                } else {
+                    break;
                 }
             }
-            cnt++;
         }
 
-        System.out.println(cnt);
+        for (int i = 0; i < check.length; i++) {
+            if (check[i] == false) {
+                result++;
+            }
+        }
 
+        System.out.println(result);
     }
 }
