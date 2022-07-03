@@ -46,34 +46,12 @@ public class BOJ3190_뱀_220703 {
                 if (directs[i].direct.equals("L")) {
                     int nextDirect = direct - 1;
                     if (nextDirect < 0) nextDirect = 3;
-                    curDirect = nextDirect;
+                    direct = nextDirect;
                 } else {
                     int nextDirect = direct + 1;
                     if (nextDirect > 3) nextDirect = 0;
-                    curDirect = nextDirect;
+                    direct = nextDirect;
                 }
-                curX = x + dx[curDirect];
-                curY = y + dy[curDirect];
-                curTime = time + 1;
-
-                if (curX < 0 || curY < 0 || curX >= N || curY >= N) {
-                    isEnd = true;
-                    return;
-                }
-
-                if (board[curX][curY] == 2) {
-                    board[curX][curY] = 1;
-                    snake.offer(new Snake(curX, curY));
-                } else if (board[curX][curY] == 1) {
-                    isEnd = true;
-                    return;
-                } else {
-                    board[curX][curY] = 1;
-                    snake.offer(new Snake(curX, curY));
-                    Snake tail = snake.poll();
-                    board[tail.x][tail.y] = 0;
-                }
-                return;
             }
         }
 
@@ -101,7 +79,6 @@ public class BOJ3190_뱀_220703 {
         }
 
         move(nx, ny, time + 1, direct);
-
     }
 
     public static void main(String[] args) throws Exception {
