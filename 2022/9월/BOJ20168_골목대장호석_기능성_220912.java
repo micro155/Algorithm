@@ -3,7 +3,6 @@ package algorithm_220912;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.PriorityQueue;
 import java.util.StringTokenizer;
 
 public class BOJ20168_골목대장호석_기능성_220912 {
@@ -12,20 +11,13 @@ public class BOJ20168_골목대장호석_기능성_220912 {
     private static ArrayList<Point> pointList[];
     private static boolean visited[];
 
-    private static class Point implements Comparable<Point> {
+    private static class Point {
         int end;
         int cost;
-        int max;
 
-        public Point(int end, int cost, int max) {
+        public Point(int end, int cost) {
             this.end = end;
             this.cost = cost;
-            this.max = max;
-        }
-
-        @Override
-        public int compareTo(Point o) {
-            return this.cost - o.cost;
         }
     }
 
@@ -79,8 +71,8 @@ public class BOJ20168_골목대장호석_기능성_220912 {
             int end = Integer.parseInt(st.nextToken());
             int cost = Integer.parseInt(st.nextToken());
 
-            pointList[start].add(new Point(end, cost, cost));
-            pointList[end].add(new Point(start, cost, cost));
+            pointList[start].add(new Point(end, cost));
+            pointList[end].add(new Point(start, cost));
         }
 
         dfs(A, C, 0);
